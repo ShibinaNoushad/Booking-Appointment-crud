@@ -48,7 +48,7 @@ function saveToLoCalStorage(event){
     
   }
   
-  //function to display list of users when clicking reload
+  //function to get data from crud when reload
   window.addEventListener("DOMContentLoaded",() => {
     axios.get('https://crudcrud.com/api/9fce26b7f13749bda3a71cad85010289/AppointmentData')
     .then((response) => {
@@ -59,6 +59,7 @@ function saveToLoCalStorage(event){
     .catch((err) => {
         console.log(err);
     })
+    
   });
 
   //function to remover user with same mail id
