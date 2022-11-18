@@ -33,20 +33,14 @@ function saveToLoCalStorage(event){
 
       }
     const parentNode=document.getElementById('itemss');
-    const HTML= `<li id="${user.email}"> <b>Name:</b> ${user.username} <b>Email:</b> ${user.email} <button onclick=deleteUser('${user.email}')> Delete</button>
+    const HTML= `<li id="${user._id}"> <b>Name:</b> ${user.username} <b>Email:</b> ${user.email} <button onclick=deleteUser('${user._id}')> Delete</button>
     <button onclick=EditUser('${user.email}','${user.username}')> Edit</button> 
   
  </li>`;
-    // const btn=document.createElement('button');
-    // btn.appendChild(document.createTextNode('x'));//append text node
-
-    // HTML.appendChild(btn);
-
+    
     parentNode.innerHTML=parentNode.innerHTML + HTML;
     
-    
-    
-  }
+      }
   
   //function to get data from crud when reload
   window.addEventListener("DOMContentLoaded",() => {
@@ -71,12 +65,19 @@ function saveToLoCalStorage(event){
     }
 };
 
-//function to delete user from ls and screen
-function deleteUser(mailid){
-    localStorage.removeItem(mailid);
-    removeUserFromScreen(mailid);
+//function to delete user from crud and screen
+function deleteUser(Userid){
+    axios.delete(`https://crudcrud.com/api/9fce26b7f13749bda3a71cad85010289/AppointmentData/${Userid}`)
+    .then((res)=>{
+      removeUserFromScreen(Userid);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
 
-};
+        }
+
+  
 
 //function to edit user
 function EditUser(mailid,username){
