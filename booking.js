@@ -34,7 +34,7 @@ function saveToLoCalStorage(event){
       }
     const parentNode=document.getElementById('itemss');
     const HTML= `<li id="${user._id}"> <b>Name:</b> ${user.username} <b>Email:</b> ${user.email} <button onclick=deleteUser('${user._id}')> Delete</button>
-    <button onclick=EditUser('${user.email}','${user.username}')> Edit</button> 
+    <button onclick=EditUser('${user.email}','${user.username}','${user._id}')> Edit</button> 
   
  </li>`;
     
@@ -80,14 +80,21 @@ function deleteUser(Userid){
   
 
 //function to edit user
-function EditUser(mailid,username){
+function EditUser(mailid,username,userid){
      var inputname=document.querySelector('#name');
      inputname.value=username;
      var inputemail=document.querySelector('#email');
      inputemail.value=mailid;
-     removeUserFromScreen(mailid);
+    // removeUserFromScreen(mailid);
+    axios.delete(`https://crudcrud.com/api/9fce26b7f13749bda3a71cad85010289/AppointmentData/${userid}`)
+    .then((res)=>{
+      removeUserFromScreen(userid);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
 
-    localStorage.removeItem(mailid);
+  
     
 
     
